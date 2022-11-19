@@ -1,4 +1,5 @@
 ﻿/* CÁC PROC VÀ HÀM TIỆN ÍCH (SỬ DỤNG CHUNG) */
+
 USE QLHS_HP
 GO
 
@@ -30,10 +31,12 @@ BEGIN
 	RECONFIGURE WITH OVERRIDE
 	EXEC master.dbo.sp_configure 'xp_cmdshell', 1
 	RECONFIGURE WITH OVERRIDE
+
 	--Rename file
 	DECLARE @cmd NVARCHAR(4000)
 	SET @cmd = N'rename ' + N'"'+ @stPathFileFull + N'" "' +  @stFileName + N'"'
 	EXEC xp_cmdshell @cmd, no_output
+
 	-- Tắt chế độ sử dụng lệnh xp_cmdshell
 	EXEC master.dbo.sp_configure 'xp_cmdshell', 0
 	RECONFIGURE WITH OVERRIDE
@@ -50,10 +53,12 @@ BEGIN
 	RECONFIGURE WITH OVERRIDE
 	EXEC master.dbo.sp_configure 'xp_cmdshell', 1
 	RECONFIGURE WITH OVERRIDE
+
 	--Delete file
 	DECLARE @cmd NVARCHAR(4000)
 	SET @cmd = N'del /F ' + N'"'+ @stPathFileFull + N'"'
 	EXEC xp_cmdshell @cmd, no_output
+
 	-- Tắt chế độ sử dụng lệnh xp_cmdshell
 	EXEC master.dbo.sp_configure 'xp_cmdshell', 0
 	RECONFIGURE WITH OVERRIDE
